@@ -75,6 +75,7 @@ bool WindowlessEglApplication::tryCreateContext(const Configuration& configurati
 
     /* Choose EGL config */
     static const EGLint attribs[] = {
+        EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
         #ifndef MAGNUM_TARGET_GLES
         EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT,
         #elif defined(MAGNUM_TARGET_GLES3)
