@@ -286,6 +286,38 @@ if(WITH_WINDOWLESSGLXAPPLICATION OR NEED_ABSTRACTXAPPLICATION)
     endif()
 endif()
 
+# Windowless EGL application
+if(WITH_WINDOWLESSEGLAPPLICATION)
+    set(NEED_EGLCONTEXT 1)
+
+    set(MagnumWindowlessEglApplication_SRCS
+        WindowlessEglApplication.cpp
+        Implementation/Egl.cpp
+        $<TARGET_OBJECTS:MagnumEglContextObjects>)
+    set(MagnumWindowlessEglApplication_HEADERS
+        WindowlessEglApplication.h)
+    set(MagnumWindowlessEglApplication_PRIVATE_HEADERS
+        Implementation/Egl.h)
+
+    add_library(MagnumWindowlessEglApplication STATIC
+        ${MagnumWindowlessEglApplication_SRCS}
+        ${MagnumWindowlessEglApplication_HEADERS}
+        ${MagnumWindowlessEglApplication_PRIVATE_HEADERS})
+    set_target_properties(MagnumWindowlessEglApplication PROPERTIES DEBUG_POSTFIX "-d")
+    target_link_libraries(MagnumWindowlessEglApplication Magnum ${EGL_LIBRARY})
+    # Assuming that PIC is not needed because the Application lib is always
+    # linked to the executable and not to any intermediate shared lib
+
+    install(FILES ${MagnumWindowlessEglApplication_HEADERS} DESTINATION ${MAGNUM_INCLUDE_INSTALL_DIR}/Platform)
+    install(TARGETS MagnumWindowlessEglApplication
+        RUNTIME DESTINATION ${MAGNUM_BINARY_INSTALL_DIR}
+        LIBRARY DESTINATION ${MAGNUM_LIBRARY_INSTALL_DIR}
+        ARCHIVE DESTINATION ${MAGNUM_LIBRARY_INSTALL_DIR})
+
+    # Magnum WindowlessEglApplication library for superprojects
+    set(MAGNUM_WINDOWLESSEGLAPPLICATION_LIBRARY MagnumWindowlessEglApplication CACHE INTERNAL "")
+endif()
+
 # Windowless GLX application
 if(WITH_WINDOWLESSGLXAPPLICATION)
     set(NEED_GLXCONTEXT 1)

@@ -54,6 +54,7 @@
 #  Sdl2Application  - SDL2 application
 #  XEglApplication  - X/EGL application
 #  WindowlessCglApplication - Windowless CGL application
+#  WindowlessEglApplication - Windowless EGL application
 #  WindowlessGlxApplication - Windowless GLX application
 #  WindowlessNaClApplication - Windowless NaCl application
 #  WindowlessWglApplication - Windowless WGL application
@@ -432,6 +433,17 @@ foreach(component ${Magnum_FIND_COMPONENTS})
             endif()
 
         # Windowless CGL application has no additional dependencies
+
+        # Windowless EGL application dependencies
+        elseif(${component} STREQUAL WindowlessEglApplication)
+            find_package(EGL)
+            if(EGL_FOUND)
+                set(_MAGNUM_${_COMPONENT}_LIBRARIES ${EGL_LIBRARY})
+            else()
+                unset(MAGNUM_${_COMPONENT}_LIBRARY)
+            endif()
+        endif()
+
         # Windowless WGL application has no additional dependencies
 
         # Windowless Windows/EGL application dependencies
