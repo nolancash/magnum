@@ -55,7 +55,9 @@ if(WITH_DISTANCEFIELDCONVERTER)
 
     add_executable(magnum-distancefieldconverter distancefieldconverter.cpp)
 
-    if(CORRADE_TARGET_APPLE)
+    if(MAGNUM_TARGET_HEADLESS)
+        target_link_libraries(magnum-distancefieldconverter MagnumTextureTools MagnumWindowlessEglApplication)
+    elseif(CORRADE_TARGET_APPLE)
         target_link_libraries(magnum-distancefieldconverter MagnumTextureTools MagnumWindowlessCglApplication)
     elseif(CORRADE_TARGET_UNIX AND NOT TARGET_GLES)
         target_link_libraries(magnum-distancefieldconverter MagnumTextureTools Magnum MagnumWindowlessGlxApplication)
