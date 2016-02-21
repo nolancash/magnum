@@ -41,6 +41,9 @@ set(TgaImporter_HEADERS
 add_library(TgaImporterObjects OBJECT
     ${TgaImporter_SRCS}
     ${TgaImporter_HEADERS})
+target_include_directories(TgaImporterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(TgaImporterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(TgaImporterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_PLUGINS_STATIC)
     set_target_properties(TgaImporterObjects PROPERTIES COMPILE_FLAGS "-DTgaImporterObjects_EXPORTS")
 endif()

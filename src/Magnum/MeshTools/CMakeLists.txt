@@ -56,6 +56,9 @@ set(MagnumMeshTools_HEADERS
 add_library(MagnumMeshToolsObjects OBJECT
     ${MagnumMeshTools_SRCS}
     ${MagnumMeshTools_HEADERS})
+target_include_directories(MagnumMeshToolsObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumMeshToolsObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumMeshToolsObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_STATIC)
     set_target_properties(MagnumMeshToolsObjects PROPERTIES COMPILE_FLAGS "-DMagnumMeshToolsObjects_EXPORTS")
 endif()

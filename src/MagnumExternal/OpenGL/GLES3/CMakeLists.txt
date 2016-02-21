@@ -25,6 +25,9 @@
 
 # flextGLPlatform.cpp is compiled as part of Magnum*Context libraries in Platform
 add_library(MagnumFlextGLObjects OBJECT flextGL.cpp)
+target_include_directories(MagnumFlextGLObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumFlextGLObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumFlextGLObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?Clang")
     set_target_properties(MagnumFlextGLObjects PROPERTIES COMPILE_FLAGS "-fvisibility=hidden -DFlextGL_EXPORTS")

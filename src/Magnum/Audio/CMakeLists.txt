@@ -65,7 +65,7 @@ if(BUILD_STATIC_PIC)
     set_target_properties(MagnumAudio PROPERTIES POSITION_INDEPENDENT_CODE ON)
 endif()
 
-target_link_libraries(MagnumAudio Magnum ${CORRADE_PLUGINMANAGER_LIBRARIES} ${OPENAL_LIBRARY})
+target_link_libraries(MagnumAudio Magnum Corrade::PluginManager ${OPENAL_LIBRARY})
 
 if(WITH_SCENEGRAPH)
     target_link_libraries(MagnumAudio MagnumSceneGraph)

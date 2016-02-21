@@ -425,6 +425,9 @@ if(NEED_ABSTRACTXAPPLICATION)
     add_library(MagnumAbstractXApplication OBJECT
         ${MagnumAbstractXApplication_SRCS}
         ${MagnumAbstractXApplication_HEADERS})
+    target_include_directories(MagnumAbstractXApplication PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumAbstractXApplication PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumAbstractXApplication PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     # X11 macros are a mess, disable warnings for C-style casts
     set_target_properties(MagnumAbstractXApplication PROPERTIES COMPILE_FLAGS "-Wno-old-style-cast")
     # Assuming that PIC is not needed because the Application lib is always
@@ -444,6 +447,9 @@ if(NEED_GLXCONTEXTHANDLER)
     add_library(MagnumGlxContextHandler OBJECT
         ${MagnumGlxContextHandler_SRCS}
         ${MagnumGlxContextHandler_PRIVATE_HEADERS})
+    target_include_directories(MagnumGlxContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumGlxContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumGlxContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     # X11 macros are a mess, disable warnings for C-style casts
     set_target_properties(MagnumGlxContextHandler PROPERTIES COMPILE_FLAGS "-Wno-old-style-cast")
     # Assuming that PIC is not needed because this is part of Application lib,
@@ -471,6 +477,9 @@ if(NEED_EGLCONTEXTHANDLER)
     add_library(MagnumEglContextHandler OBJECT
         ${MagnumEglContextHandler_SRCS}
         ${MagnumEglContextHandler_PRIVATE_HEADERS})
+    target_include_directories(MagnumEglContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumEglContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumEglContextHandler PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     # X11 macros are a mess, disable warnings for C-style casts
     set_target_properties(MagnumEglContextHandler PROPERTIES COMPILE_FLAGS "-Wno-old-style-cast")
     # Assuming that PIC is not needed because this is part of Application lib,
@@ -502,6 +511,9 @@ endif()
 # CGL context
 if(NEED_CGLCONTEXT OR WITH_CGLCONTEXT)
     add_library(MagnumCglContextObjects OBJECT ${MagnumContext_SRCS})
+    target_include_directories(MagnumCglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumCglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumCglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     if(BUILD_STATIC_PIC)
         set_target_properties(MagnumCglContextObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
     endif()
@@ -538,6 +550,9 @@ if(NEED_EGLCONTEXT OR WITH_EGLCONTEXT)
     include_directories(${EGL_INCLUDE_DIR})
 
     add_library(MagnumEglContextObjects OBJECT ${MagnumContext_SRCS})
+    target_include_directories(MagnumEglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumEglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumEglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     set_target_properties(MagnumEglContextObjects PROPERTIES COMPILE_DEFINITIONS "MAGNUM_PLATFORM_USE_EGL")
     if(BUILD_STATIC_PIC)
         set_target_properties(MagnumEglContextObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -565,6 +580,9 @@ endif()
 # GLX context
 if(NEED_GLXCONTEXT OR WITH_GLXCONTEXT)
     add_library(MagnumGlxContextObjects OBJECT ${MagnumContext_SRCS})
+    target_include_directories(MagnumGlxContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumGlxContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumGlxContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     set_target_properties(MagnumGlxContextObjects PROPERTIES COMPILE_DEFINITIONS "MAGNUM_PLATFORM_USE_GLX")
     if(BUILD_STATIC_PIC)
         set_target_properties(MagnumGlxContextObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -592,6 +610,9 @@ endif()
 # WGL context
 if(NEED_WGLCONTEXT OR WITH_WGLCONTEXT)
     add_library(MagnumWglContextObjects OBJECT ${MagnumContext_SRCS})
+    target_include_directories(MagnumWglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_compile_definitions(MagnumWglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+    target_compile_options(MagnumWglContextObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
     if(BUILD_STATIC_PIC)
         set_target_properties(MagnumWglContextObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
     endif()

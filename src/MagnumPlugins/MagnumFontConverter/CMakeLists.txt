@@ -33,6 +33,9 @@ set(MagnumFontConverter_HEADERS
 add_library(MagnumFontConverterObjects OBJECT
     ${MagnumFontConverter_SRCS}
     ${MagnumFontConverter_HEADERS})
+target_include_directories(MagnumFontConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumFontConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumFontConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_PLUGINS_STATIC OR BUILD_STATIC_PIC)
     set_target_properties(MagnumFontConverterObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
 endif()

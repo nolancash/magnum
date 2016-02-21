@@ -79,6 +79,9 @@ endif()
 add_library(MagnumSceneGraphObjects OBJECT
     ${MagnumSceneGraph_SRCS}
     ${MagnumSceneGraph_HEADERS})
+target_include_directories(MagnumSceneGraphObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumSceneGraphObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumSceneGraphObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_STATIC)
     set_target_properties(MagnumSceneGraphObjects PROPERTIES COMPILE_FLAGS "-DMagnumSceneGraphObjects_EXPORTS")
 endif()

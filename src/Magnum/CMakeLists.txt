@@ -232,6 +232,9 @@ set(MagnumMath_SRCS
 
 # Objects shared between main and test library
 add_library(MagnumMathObjects OBJECT ${MagnumMath_SRCS})
+target_include_directories(MagnumMathObjects PUBLIC $<TARGET_PROPERTY:Corrade::Utility,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumMathObjects PUBLIC $<TARGET_PROPERTY:Corrade::Utility,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumMathObjects PUBLIC $<TARGET_PROPERTY:Corrade::Utility,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_STATIC)
     set_target_properties(MagnumMathObjects PROPERTIES COMPILE_FLAGS "-DMagnumMathObjects_EXPORTS")
 endif()
@@ -254,8 +257,8 @@ elseif(BUILD_STATIC_PIC)
 endif()
 
 set(Magnum_LIBS
-    ${CORRADE_UTILITY_LIBRARIES}
-    ${CORRADE_PLUGINMANAGER_LIBRARIES})
+    Corrade::Utility
+    Corrade::PluginManager)
 if(NOT TARGET_GLES OR TARGET_DESKTOP_GLES)
     set(Magnum_LIBS ${Magnum_LIBS} ${OPENGL_gl_LIBRARY})
 elseif(TARGET_GLES2)
@@ -321,7 +324,7 @@ if(BUILD_TESTS)
     set_target_properties(MagnumMathTestLib PROPERTIES
         COMPILE_FLAGS "-DCORRADE_GRACEFUL_ASSERT"
         DEBUG_POSTFIX "-d")
-    target_link_libraries(MagnumMathTestLib ${CORRADE_UTILITY_LIBRARIES})
+    target_link_libraries(MagnumMathTestLib Corrade::Utility)
 
     # On Windows we need to install first and then run the tests to avoid "DLL
     # not found" hell, thus we need to install this too

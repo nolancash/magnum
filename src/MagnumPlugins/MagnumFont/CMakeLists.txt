@@ -33,6 +33,9 @@ set(MagnumFont_HEADERS
 add_library(MagnumFontObjects OBJECT
     ${MagnumFont_SRCS}
     ${MagnumFont_HEADERS})
+target_include_directories(MagnumFontObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(MagnumFontObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(MagnumFontObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_PLUGINS_STATIC OR BUILD_STATIC_PIC)
     set_target_properties(MagnumFontObjects PROPERTIES POSITION_INDEPENDENT_CODE ON)
 endif()

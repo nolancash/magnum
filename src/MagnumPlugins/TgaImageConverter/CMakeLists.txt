@@ -40,6 +40,9 @@ set(TgaImageConverter_HEADERS
 add_library(TgaImageConverterObjects OBJECT
     ${TgaImageConverter_SRCS}
     ${TgaImageConverter_HEADERS})
+target_include_directories(TgaImageConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_INCLUDE_DIRECTORIES>)
+target_compile_definitions(TgaImageConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_DEFINITIONS>)
+target_compile_options(TgaImageConverterObjects PUBLIC $<TARGET_PROPERTY:Magnum,INTERFACE_COMPILE_OPTIONS>)
 if(NOT BUILD_PLUGINS_STATIC)
     set_target_properties(TgaImageConverterObjects PROPERTIES COMPILE_FLAGS "-DTgaImageConverterObjects_EXPORTS")
 endif()
