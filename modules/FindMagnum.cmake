@@ -151,7 +151,7 @@
 #
 
 # Dependencies
-find_package(Corrade REQUIRED)
+find_package(Corrade REQUIRED Utility PluginManager)
 
 # Base Magnum library
 find_library(MAGNUM_LIBRARY_DEBUG Magnum-d)
@@ -215,8 +215,8 @@ set(MAGNUM_INCLUDE_DIRS ${MAGNUM_INCLUDE_DIR}
     ${MAGNUM_INCLUDE_DIR}/MagnumExternal/OpenGL
     ${CORRADE_INCLUDE_DIRS})
 set(MAGNUM_LIBRARIES ${MAGNUM_LIBRARY}
-    ${CORRADE_UTILITY_LIBRARIES}
-    ${CORRADE_PLUGINMANAGER_LIBRARIES})
+    Corrade::Utility
+    Corrade::PluginManager)
 if(NOT MAGNUM_TARGET_GLES OR MAGNUM_TARGET_DESKTOP_GLES)
     find_package(OpenGL REQUIRED)
     set(MAGNUM_LIBRARIES ${MAGNUM_LIBRARIES} ${OPENGL_gl_LIBRARY})
